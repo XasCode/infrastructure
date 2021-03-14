@@ -33,3 +33,4 @@ package-lock.json
 node_modules/
 .terraform/
 .terraform.lock.hcl
+terraform.tfvars
