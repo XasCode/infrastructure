@@ -11,7 +11,7 @@ variable "billing_account" {
 }
 
 resource "google_folder" "shared_infrastructure" {
-  display_name = "shared_infrastructure"
+  display_name = "Shared Infrastructure"
   parent       = "organizations/${var.organization_id}"
 }
 
