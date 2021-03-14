@@ -1,7 +1,7 @@
 terraform {
   backend "remote" {
     hostname = "app.terraform.io"
-    organization = "xascode"
+    organization = "example"
 
     workspaces {
       name = "shared_infrastructure"

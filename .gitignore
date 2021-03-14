@@ -34,3 +34,4 @@ node_modules/
 .terraform/
 .terraform.lock.hcl
 terraform.tfvars
+remote.tf
