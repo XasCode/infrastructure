@@ -6,7 +6,7 @@ resource "google_service_account" "shared-backups-test-svc-check-snapshots" {
 
 resource "google_organization_iam_binding" "shared-backups-test-bind-check-snapshots" {
   org_id  = var.organization_id
-  role    = "roles/${google_organization_iam_custom_role.shared-backups-test-role-svc-check-snapshots.role_id}"
+  role    = "organizations/${var.organization_id}/roles/${google_organization_iam_custom_role.shared-backups-test-role-svc-check-snapshots.role_id}"
 
   members = [
     "serviceAccount:${google_service_account.shared-backups-test-svc-check-snapshots.email}"
