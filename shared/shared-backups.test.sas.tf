@@ -1,3 +1,4 @@
+/*
 resource "google_service_account" "shared-backups-test-svc-check-snapshots" {
   account_id   = "svc-check-snapshots-${random_id.project.hex}"
   display_name = "shared-backups-test-svc-check-snapshots"
@@ -23,3 +24,4 @@ resource "null_resource" "delay" {
     "before" = google_service_account.shared-backups-test-svc-check-snapshots.id
   }
 }
+*/

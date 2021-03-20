@@ -1,3 +1,4 @@
+/*
 resource "google_folder" "shared" {
   display_name = "Shared"
   parent       = "organizations/${var.organization_id}"
@@ -14,3 +15,4 @@ output "shared-backups" {
 output "shared-backups-test" {
   value = google_folder.shared-backups-test.folder_id
 }
+*/

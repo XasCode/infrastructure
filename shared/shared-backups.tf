@@ -1,3 +1,4 @@
+/*
 resource "google_folder" "shared-backups" {
   display_name = "Backups"
   parent       = "folders/${google_folder.shared.folder_id}"
@@ -15,3 +16,4 @@ module "validator" {
     organization_name = var.organization_name
   }
 }
+*/

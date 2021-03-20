@@ -1,3 +1,4 @@
+/*
 resource "google_organization_iam_custom_role" "shared-backups-test-role-svc-check-snapshots" {
   role_id     = "shared.backups.test.role.svc.check.snapshots"
   org_id      = var.organization_id
@@ -22,3 +23,4 @@ resource "google_organization_iam_custom_role" "shared-backups-test-role-svc-che
     "storage.objects.create"
   ]
 }
+*/

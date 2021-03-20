@@ -1,3 +1,4 @@
+/*
 resource "google_folder" "shared-backups-test" {
   display_name = "Test"
   parent       = "folders/${google_folder.shared-backups.folder_id}"
@@ -32,3 +33,4 @@ resource "google_project" "test2-test" {
     project_id          = "${var.organization_name}-backups-test2-${random_id.project.hex}"
     timeouts {}
 }
+*/
