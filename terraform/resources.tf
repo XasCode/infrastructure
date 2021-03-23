@@ -16,7 +16,6 @@ module "env" {
 
 module "corp" {
   source = "github.com/xascode/tf_modules//ou?ref=v0.1.0-alpha.5"
-  //source = "./modules/ou"
 
   name   = "corp"
   parent = {
