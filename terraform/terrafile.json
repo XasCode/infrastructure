@@ -1,0 +1,11 @@
+{
+  "org": {
+    "source": "https://github.com/xascode/tf_modules.git//org?ref=v0.1.0-alpha.7"
+  },
+  "env": {
+    "source": "https://github.com/xascode/tf_modules.git//env?ref=v0.1.0-alpha.7"
+  },
+  "ou": {
+    "source": "https://github.com/xascode/tf_modules.git//ou?ref=v0.1.0-alpha.7"
+  }
+}
