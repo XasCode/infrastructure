@@ -13,7 +13,7 @@ module "env" {
     path = module.org.path
   }
 
-  envs = [ "devl", "test" ]
+  envs = [ "devl" ]
   environment  = var.environment
 }
 
