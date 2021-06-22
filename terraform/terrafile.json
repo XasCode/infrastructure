@@ -1,11 +1,14 @@
 {
   "org": {
-    "source": "https://github.com/xascode/tf_modules.git//org"
+    "comment": "https://github.com/xascode/tf_modules.git//org",
+    "source": "../../tf_modules/org"
   },
   "env": {
-    "source": "https://github.com/xascode/tf_modules.git//env"
+    "comment": "https://github.com/xascode/tf_modules.git//env",
+    "source": "../../tf_modules/env"
   },
   "ou": {
-    "source": "https://github.com/xascode/tf_modules.git//ou"
+    "comment": "https://github.com/xascode/tf_modules.git//ou",
+    "source": "../../tf_modules/ou"
   }
 }
