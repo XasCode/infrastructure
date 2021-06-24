@@ -2,7 +2,6 @@ module "org" {
   source = "./vendor/modules/org"
   
   name   = var.organization_name
-
 }
 
 module "env" {
