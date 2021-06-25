@@ -3,11 +3,18 @@
     "terrafile": "^0.1.12"
   },
   "scripts": {
-    "build-project": "cd submodules/tf_modules/project && rm -Rf vendor && terrafile install",
-    "build-env": "cd submodules/tf_modules/env && rm -Rf vendor && terrafile install",
-    "build-ou": "cd submodules/tf_modules/ou && rm -Rf vendor && terrafile install",
-    "build-snapshots": "cd submodules/snapshots && rm -Rf vendor && terrafile install",
-    "build-terraform": "cd terraform && rm -Rf vendor && terrafile install",
-    "terrafile": "npm run build-project && npm run build-env && npm run build-ou && npm run build-snapshots && npm run build-terraform"
+    "clean-project": "cd submodules/tf_modules/project && rm -Rf vendor",
+    "build-project": "cd submodules/tf_modules/project && terrafile install",
+    "clean-env": "cd submodules/tf_modules/env && rm -Rf vendor",
+    "build-env": "cd submodules/tf_modules/env && terrafile install",
+    "clean-ou": "cd submodules/tf_modules/ou && rm -Rf vendor",
+    "build-ou": "cd submodules/tf_modules/ou && terrafile install",
+    "clean-snapshots": "cd submodules/snapshots && rm -Rf vendor",
+    "build-snapshots": "cd submodules/snapshots && terrafile install",
+    "clean-terraform": "cd terraform && rm -Rf vendor",
+    "build-terraform": "cd terraform && terrafile install",
+    "terrafile-clean": "npm run clean-project && npm run clean-env && npm run clean-ou && npm run clean-snapshots && npm run clean-terraform",
+    "terrafile-build": "npm run build-project && npm run build-env && npm run build-ou && npm run build-snapshots && npm run build-terraform",
+    "terrafile": "npm run terrafile-clean && npm run terrafile-build"
   }
 }
