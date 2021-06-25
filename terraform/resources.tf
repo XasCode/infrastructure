@@ -34,22 +34,6 @@ module "corp" {
   depends_on = [module.env]
 }
 
-module marketing {
-  source = "./vendor/modules/ou"
-
-  name   = "marketing"
-  parent = {
-    name = module.corp.name
-    path = module.corp.path
-  }
-
-  envs = [ "devl", "test" ]
-  environment  = var.environment
-
-  billing_account = var.billing_account
-
-  depends_on = [module.env]
-}
 
 module randd {
   source = "./vendor/modules/ou"
