@@ -63,9 +63,10 @@ resource "random_id" "random" {
   byte_length = 3
 }
 
-resource "google_project_iam_custom_role" "role-svc-check-snapshots" {
+resource "google_organization_iam_custom_role" "role-svc-check-snapshots" {
   role_id     = "role_svc_check_snapshots_${random_id.random.hex}"
-  project     = module.security.id
+  #project     = module.security.id
+  org_id      = var.organization_id
   title       = "role_svc_check_snapshots_${random_id.random.hex}"
   description = "Role / permissions to assign to service account for automatically setting up disk snapshots."
   permissions = [
