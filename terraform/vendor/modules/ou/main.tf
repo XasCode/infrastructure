@@ -130,6 +130,18 @@ resource "google_project_service" "cloud_scheduler" {
   disable_dependent_services = true
 }
 
+resource "google_project_service" "app_engine" {
+  project = module.snapshots.id
+  service = "appengine.googleapis.com"
+
+  timeouts {
+    create = "3m"
+    update = "6m"
+  }
+
+  disable_dependent_services = true
+}
+
 resource "google_app_engine_application" "app" {
   project     = module.snapshots.id
   location_id = "us-east1"
