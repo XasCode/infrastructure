@@ -182,30 +182,30 @@ resource "google_cloud_scheduler_job" "scheduler-job-snapshots" {
   ]
 }
 
-#resource "google_cloudfunctions_function" "function-snapshots" {
-#  name        = "function-${module.snapshots.name}-${random_id.random.hex}"
-#  description = "function-${module.snapshots.name}-${random_id.random.hex}"
-#  runtime     = "nodejs14"
-#
-#  available_memory_mb   = 256
-#  #source_archive_bucket = google_storage_bucket.bucket.name
-#  #source_archive_object = google_storage_bucket_object.archive.name
-#  #trigger_http          = true
-#  timeout               = 60
-#  #entry_point           = "helloGET"
-#  #labels = {
-#  #  my-label = "my-label-value"
-#  #}
-#
-#  #environment_variables = {
-#  #  MY_ENV_VAR = "my-env-var-value"
-#  #}
-#
-#  event_trigger {
-#      event_type= "google.pubsub.topic.publish"
-#      #resource= "projects/${module.snapshots.id}/topics/cloud-builds-topic"
-#      resource = google_pubsub_topic.pubsub-snapshots.id
-#      #service= "pubsub.googleapis.com"
-#      #failure_policy= {}
-#   }
-#}
+resource "google_cloudfunctions_function" "function-snapshots" {
+  name        = "function-${module.snapshots.name}-${random_id.random.hex}"
+  description = "function-${module.snapshots.name}-${random_id.random.hex}"
+  runtime     = "nodejs14"
+
+  available_memory_mb   = 256
+  #source_archive_bucket = google_storage_bucket.bucket.name
+  #source_archive_object = google_storage_bucket_object.archive.name
+  #trigger_http          = true
+  timeout               = 60
+  #entry_point           = "helloGET"
+  #labels = {
+  #  my-label = "my-label-value"
+  #}
+
+  #environment_variables = {
+  #  MY_ENV_VAR = "my-env-var-value"
+  #}
+
+  event_trigger {
+      event_type= "google.pubsub.topic.publish"
+      #resource= "projects/${module.snapshots.id}/topics/cloud-builds-topic"
+      resource = google_pubsub_topic.pubsub-snapshots.id
+      #service= "pubsub.googleapis.com"
+      #failure_policy= {}
+   }
+}
