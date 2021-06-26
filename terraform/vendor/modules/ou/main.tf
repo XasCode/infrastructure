@@ -128,6 +128,8 @@ resource "google_project_service" "cloud_scheduler" {
   }
 
   disable_dependent_services = true
+
+  depends_on = [module.snapshots]
 }
 
 resource "google_project_service" "app_engine" {
@@ -140,6 +142,8 @@ resource "google_project_service" "app_engine" {
   }
 
   disable_dependent_services = true
+
+  depends_on = [module.snapshots]
 }
 
 resource "google_app_engine_application" "app" {
@@ -172,7 +176,8 @@ resource "google_cloud_scheduler_job" "scheduler-job-snapshots" {
   depends_on = [
     module.snapshots,
     google_project_service.cloud_scheduler,
-    google_project_service.app_engine
+    google_project_service.app_engine,
+    google_cloud_scheduler_job.scheduler-job-snapshots
   ]
 }
 
