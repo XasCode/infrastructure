@@ -118,27 +118,27 @@ resource "google_pubsub_topic" "pubsub-snapshots" {
   depends_on = [module.snapshots]
 }
 
-#resource "google_cloud_scheduler_job" "scheduler-job-snapshots" {
-#  name        = "scheduler-job-${module.snapshots.name}-${random_id.random.hex}"
-#  description = "scheduler-job-${module.snapshots.name}-${random_id.random.hex}"
-#  schedule    = "0 5 * * *"
-#
-#  project = module.snapshots.id
-#
-#  pubsub_target {
-#    topic_name = google_pubsub_topic.pubsub-snapshots.id
-#  }
-#
-#  retry_config {
-#    retry_count = 0
-#    max_retry_duration = "0s"
-#    min_backoff_duration = "5s"
-#    max_backoff_duration = "3600s"
-#    max_doublings = 5
-#  }
-#
-#  depends_on = [module.snapshots]
-#}
+resource "google_cloud_scheduler_job" "scheduler-job-snapshots" {
+  name        = "scheduler-job-${module.snapshots.name}-${random_id.random.hex}"
+  description = "scheduler-job-${module.snapshots.name}-${random_id.random.hex}"
+  schedule    = "0 5 * * *"
+
+  project = module.snapshots.id
+
+  pubsub_target {
+    topic_name = google_pubsub_topic.pubsub-snapshots.id
+  }
+
+  retry_config {
+    retry_count = 0
+    max_retry_duration = "0s"
+    min_backoff_duration = "5s"
+    max_backoff_duration = "3600s"
+    max_doublings = 5
+  }
+
+  depends_on = [module.snapshots]
+}
 
 #resource "google_cloudfunctions_function" "function-snapshots" {
 #  name        = "function-${module.snapshots.name}-${random_id.random.hex}"
