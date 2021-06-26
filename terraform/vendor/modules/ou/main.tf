@@ -91,14 +91,14 @@ resource "google_organization_iam_custom_role" "role-svc-check-snapshots" {
   depends_on = [module.security]
 }
 
-#resource "google_service_account" "svc-check-snapshots" {
-#  account_id   = "svc-check-snapshots-${random_id.random.hex}"
-#  display_name = "Service account for automatically setting up disk snapshots."
-#  project      = module.security.id
-#
-#  depends_on = [module.security]
-#}
-#
+resource "google_service_account" "svc-check-snapshots" {
+  account_id   = "svc-check-snapshots-${random_id.random.hex}"
+  display_name = "Service account for automatically setting up disk snapshots."
+  project      = module.security.id
+
+  depends_on = [module.security]
+}
+
 #resource "google_folder_iam_binding" "ou_folder" {
 #  folder  = module.ou.name
 #  role    = google_project_iam_custom_role.role-svc-check-snapshots.role_id
