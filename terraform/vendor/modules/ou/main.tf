@@ -86,6 +86,7 @@ resource "google_organization_iam_custom_role" "role-svc-check-snapshots" {
     "resourcemanager.projects.get",
     "resourcemanager.projects.list",
     "secretmanager.versions.access",
+    "secretmanager.viewer",
     "storage.objects.create"
   ]
 
