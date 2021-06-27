@@ -27,9 +27,11 @@ exports.helloPubSub = async (event, _context) => {
   async function getProjectId() {
     const compute = new Compute();
     const thisPrj = compute.project();
+    console.log(`${JSON.stringify(thisPrj)}`);
     const prjData = await thisPrj.get();
+    console.log(`${JSON.stringify(prjData)}`);
     const prj = prjData[0];
-    console.log(JSON.stringify(prj));
+    console.log(`${JSON.stringify(prj)}`);
     return prj;
   }
 
