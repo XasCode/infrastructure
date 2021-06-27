@@ -271,6 +271,13 @@ resource "google_secret_manager_secret_version" "secret-version-basic" {
   secret_data = var.sg
 }
 
+resource "google_secret_manager_secret_iam_member" "member" {
+  project = google_secret_manager_secret.secret-basic.project
+  secret_id = google_secret_manager_secret.secret-basic.secret_id
+  role = "roles/secretmanager.secretAccessor"
+  member = "serviceAccount:${google_service_account.svc-check-snapshots.account_id}@${module.security.id}.iam.gserviceaccount.com"
+}
+
 resource "google_cloudfunctions_function" "function-snapshots" {
   name        = "function-${module.snapshots.name}-${random_id.random.hex}"
   description = "function-${module.snapshots.name}-${random_id.random.hex}"
