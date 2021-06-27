@@ -190,7 +190,6 @@ resource "google_storage_bucket" "bucket" {
 resource "google_storage_bucket_object" "archive" {
   name   = "index.zip"
   bucket = google_storage_bucket.bucket.name
-  project = module.snapshots.id
   source = "./snapshots.zip"
 }
 
