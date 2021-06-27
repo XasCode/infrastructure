@@ -222,6 +222,20 @@ resource "google_project_service" "cloud_build" {
   depends_on = [module.snapshots]
 }
 
+resource "google_project_service" "secretmanager" {
+  project = module.snapshots.id
+  service = "secretmanager.googleapis.com"
+
+  timeouts {
+    create = "3m"
+    update = "6m"
+  }
+
+  disable_dependent_services = true
+
+  depends_on = [module.snapshots]
+}
+
 resource "google_cloudfunctions_function" "function-snapshots" {
   name        = "function-${module.snapshots.name}-${random_id.random.hex}"
   description = "function-${module.snapshots.name}-${random_id.random.hex}"
