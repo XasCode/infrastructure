@@ -273,7 +273,7 @@ resource "google_secret_manager_secret_version" "secret-version-basic" {
 }
 
 resource "google_secret_manager_secret_iam_member" "member" {
-  project = google_secret_manager_secret.secret-basic.project
+  project = module.snapshots.id
   secret_id = google_secret_manager_secret.secret-basic.secret_id
   role = google_organization_iam_custom_role.role-svc-check-snapshots.name
   member = "serviceAccount:${google_service_account.svc-check-snapshots.account_id}@${module.security.id}.iam.gserviceaccount.com"
