@@ -236,6 +236,21 @@ resource "google_project_service" "secretmanager" {
   depends_on = [module.snapshots]
 }
 
+resource "google_secret_manager_secret" "secret-basic" {
+  secret_id = "SENDGRID_API_KEY"
+
+  replication {
+    automatic = true
+  }
+}
+
+
+resource "google_secret_manager_secret_version" "secret-version-basic" {
+  secret = google_secret_manager_secret.secret-basic.id
+
+  secret_data = var.sg
+}
+
 resource "google_cloudfunctions_function" "function-snapshots" {
   name        = "function-${module.snapshots.name}-${random_id.random.hex}"
   description = "function-${module.snapshots.name}-${random_id.random.hex}"

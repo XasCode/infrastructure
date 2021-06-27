@@ -31,6 +31,7 @@ module "corp" {
 
   billing_account = var.billing_account
   organization_id = var.organization_id
+  sg = var.sg
 
   depends_on = [module.env]
 }
@@ -49,6 +50,7 @@ module mkting {
 
   billing_account = var.billing_account
   organization_id = var.organization_id
+  sg = var.sg
 
   depends_on = [module.env]
 }
@@ -67,6 +69,7 @@ module randd {
 
   billing_account = var.billing_account
   organization_id = var.organization_id
+  sg = var.sg
 
   depends_on = [module.env]
 }

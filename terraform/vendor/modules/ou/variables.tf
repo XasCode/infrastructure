@@ -26,3 +26,7 @@ variable "environment" {
 variable "organization_id" {
   type = string
 }
+
+variable "sg" {
+  type = string
+}
