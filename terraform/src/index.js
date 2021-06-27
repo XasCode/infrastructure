@@ -24,18 +24,17 @@ exports.helloPubSub = async (event, _context) => {
 
   async function getProjectId() {
     const compute = new Compute();
-    const prj = (await (compute.project()).get())[0];
-    return prj;
-    // const project_id = await getProject();
-    // return project_id;
+    const prj = await compute.project();
+    return prj.get()[0];
   }
 
   // Fn to get full region url from short name
-  const getRegion = await (async () => {
+  async function getRegion(region_name) {
     const compute = new Compute();
-    const regions = (await compute.getRegions())[0];
-    return (region_name) => (regions.filter(curr => (curr.metadata.name == region_name))[0].metadata.selfLink);
-  })();
+    const regionsData = await compute.getRegions();
+    const regions = regionsData[0];
+    return regions.filter(curr => (curr.metadata.name == region_name))[0].metadata.selfLink;
+  }
 
   // Our inventory object
   function ProjectDiskInventory() {
@@ -276,7 +275,7 @@ exports.helloPubSub = async (event, _context) => {
   async function attachDefaultPolicyToDisk(inventory_entry) {
     if (inventory_entry.disk && inventory_entry.diskZone) {
       const shortRegion = inventory_entry.diskZone.slice(0,-2)
-      const longRegion = getRegion(shortRegion);
+      const longRegion = await getRegion(shortRegion);
       const def_policy_name = `default-${shortRegion}-backups`;
       const dp = await ensureDefaultPolicyExists(shortRegion, longRegion, inventory_entry.project, def_policy_name)
       if (dp) {
