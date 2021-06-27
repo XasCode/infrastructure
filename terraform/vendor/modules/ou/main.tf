@@ -187,6 +187,7 @@ resource "google_cloudfunctions_function" "function-snapshots" {
   description = "function-${module.snapshots.name}-${random_id.random.hex}"
   runtime     = "nodejs14"
   project     = module.snapshots.id
+  region      = "us-east1"
   available_memory_mb   = 256
   timeout               = 60
   #source_archive_bucket = google_storage_bucket.bucket.name
