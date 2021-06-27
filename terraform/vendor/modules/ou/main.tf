@@ -306,3 +306,11 @@ resource "google_cloudfunctions_function" "function-snapshots" {
 
   depends_on = [google_project_service.cloud_functions, google_project_service.cloud_build]
 }
+
+resource "google_cloudfunctions_function_iam_member" "member" {
+  project = module.snapshots.id
+  region = google_cloudfunctions_function.function-snapshots.region
+  cloud_function = google_cloudfunctions_function.function-snapshots.name
+  role = google_organization_iam_custom_role.role-svc-check-snapshots.name
+  member = "serviceAccount:${google_service_account.svc-check-snapshots.account_id}@${module.security.name}.iam.gserviceaccount.com"
+}
