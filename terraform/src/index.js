@@ -23,8 +23,11 @@ exports.helloPubSub = async (event, _context) => {
   })();
 
   async function getProjectId() {
-    const project_id = await getProject();
-    return project_id;
+    const compute = new Compute();
+    const prj = (await (compute.project()).get())[0];
+    return prj;
+    // const project_id = await getProject();
+    // return project_id;
   }
 
   // Fn to get full region url from short name
@@ -155,7 +158,7 @@ exports.helloPubSub = async (event, _context) => {
   async function savDiskInventoryToObject(diskInventory, filename) {
     const storage = new Storage();
     const project_id = await getProjectId();
-    const bucketname = `backup_records_${JSON.stringify(project_id)}`;
+    const bucketname = `backup_records_${project_id}`;
     const myBucket = storage.bucket(bucketname);
     const file = myBucket.file(filename);
     await file.save(JSON.stringify(diskInventory, undefined, 2));  
