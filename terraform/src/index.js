@@ -363,8 +363,8 @@ exports.helloPubSub = async (event, _context) => {
 
   async function getApiKey() {
     const secretManagerServiceClient = new SecretManagerServiceClient();
-    const project_number = await getProjectNumber();
-    const name = `projects/${project_number}/secrets/SENDGRID_API_KEY/versions/latest`;
+    const project_id = await getProjectId();
+    const name = `projects/${project_id}/secrets/SENDGRID_API_KEY/versions/latest`;
     const [version] = await secretManagerServiceClient.accessSecretVersion({ name });
     return version.payload.data.toString();
   };
