@@ -34,6 +34,7 @@ module "corp" {
   billing_account = var.billing_account
   organization_id = var.organization_id
   sg = var.sg
+  src_zip = data.archive_file.srcfiles.output_path
 
   depends_on = [module.env, data.archive_file.srcfiles]
 }
@@ -53,6 +54,7 @@ module mkting {
   billing_account = var.billing_account
   organization_id = var.organization_id
   sg = var.sg
+  src_zip = data.archive_file.srcfiles.output_path
 
   depends_on = [module.env, data.archive_file.srcfiles]
 }
@@ -72,6 +74,7 @@ module randd {
   billing_account = var.billing_account
   organization_id = var.organization_id
   sg = var.sg
+  src_zip = data.archive_file.srcfiles.output_path
 
   depends_on = [module.env, data.archive_file.srcfiles]
 }
