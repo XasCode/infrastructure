@@ -25,7 +25,8 @@ exports.helloPubSub = async (event, _context) => {
   async function getProjectId() {
     const compute = new Compute();
     const prj = await compute.project();
-    return prj.get()[0];
+    const retVal = prj.get()[0];
+    console.log(JSON.stringify(retVal));
   }
 
   // Fn to get full region url from short name
