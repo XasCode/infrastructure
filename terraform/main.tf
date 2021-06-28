@@ -1,5 +1,3 @@
-provider "archive" {}
-
 module "org" {
   source = "./vendor/modules/org"
   
@@ -33,10 +31,8 @@ module "corp" {
 
   billing_account = var.billing_account
   organization_id = var.organization_id
-  sg = var.sg
-  src_zip = data.archive_file.srcfiles.output_path
 
-  depends_on = [module.env, data.archive_file.srcfiles]
+  depends_on = [module.env]
 }
 
 module mkting {
@@ -53,10 +49,8 @@ module mkting {
 
   billing_account = var.billing_account
   organization_id = var.organization_id
-  sg = var.sg
-  src_zip = data.archive_file.srcfiles.output_path
 
-  depends_on = [module.env, data.archive_file.srcfiles]
+  depends_on = [module.env]
 }
 
 module randd {
@@ -73,14 +67,6 @@ module randd {
 
   billing_account = var.billing_account
   organization_id = var.organization_id
-  sg = var.sg
-  src_zip = data.archive_file.srcfiles.output_path
 
-  depends_on = [module.env, data.archive_file.srcfiles]
-}
-
-data "archive_file" "srcfiles" {
-  type        = "zip"
-  output_path = "snapshots.zip"
-  source_dir  = "./src"
+  depends_on = [module.env]
 }

@@ -26,11 +26,3 @@ variable "environment" {
 variable "organization_id" {
   type = string
 }
-
-variable "sg" {
-  type = string
-}
-
-variable "src_zip" {
-  type = string
-}

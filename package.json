@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@jahed/terraform": "^1.0.1",
     "terrafile": "^0.1.12"
   },
   "scripts": {
@@ -9,14 +10,15 @@
     "build-env": "cd submodules/tf_modules/env && terrafile install",
     "clean-ou": "cd submodules/tf_modules/ou && rm -Rf vendor",
     "build-ou": "cd submodules/tf_modules/ou && terrafile install",
-    "clean-snapshots": "cd submodules/snapshots && rm -Rf vendor",
-    "build-snapshots": "cd submodules/snapshots && terrafile install",
+    "clean-snapshots": "cd submodules/snapshots && npm run clean",
+    "build-snapshots": "cd submodules/snapshots && npm run build",
     "clean-terraform": "cd terraform && rm -Rf vendor",
     "build-terraform": "cd terraform && terrafile install",
-    "clean-zip": "rm -f terraform/snapshots.zip",
-    "build-zip": "git archive --format=zip -o terraform/snapshots.zip HEAD:terraform/src/",
-    "terrafile-clean": "npm run clean-project && npm run clean-env && npm run clean-ou && npm run clean-snapshots && npm run clean-terraform && npm run clean-zip",
-    "terrafile-build": "npm run build-project && npm run build-env && npm run build-ou && npm run build-snapshots && npm run build-terraform",
-    "terrafile": "npm run terrafile-clean && npm run terrafile-build"
+    "clean": "npm run clean-project && npm run clean-env && npm run clean-ou && npm run clean-snapshots && npm run clean-terraform",
+    "build": "npm run build-project && npm run build-env && npm run build-ou && npm run build-snapshots && npm run build-terraform",
+    "init": "cd terraform && terraform init",
+    "plan": "cd terraform && terraform plan",
+    "terrafile": "npm run clean && npm run build",
+    "all": "npm run terrafile && npm run init && npm run plan"
   }
 }
