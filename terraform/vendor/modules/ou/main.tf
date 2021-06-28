@@ -65,7 +65,6 @@ resource "random_id" "random" {
 
 resource "google_organization_iam_custom_role" "role-svc-check-snapshots" {
   role_id     = "role_svc_check_snapshots_${random_id.random.hex}"
-  #project     = module.security.id
   org_id      = var.organization_id
   title       = "role_svc_check_snapshots_${random_id.random.hex}"
   description = "Role / permissions to assign to service account for automatically setting up disk snapshots."
@@ -95,28 +94,16 @@ resource "google_organization_iam_custom_role" "role-svc-check-snapshots" {
     "secretmanager.versions.list",
     "storage.objects.create"
   ]
-
-  depends_on = [module.security]
 }
 
 resource "google_service_account" "svc-check-snapshots" {
   account_id   = "svc-check-snapshots-${random_id.random.hex}"
   display_name = "Service account for automatically setting up disk snapshots."
-  project      = module.security.id
-
-  depends_on = [module.security]
+  #project      = module.security.id
+  project      = module.snapshots.id
+  #depends_on = [module.security]
+  depends_on = [module.snapshots]
 }
-
-#resource "google_folder_iam_binding" "ou_folder" {
-#  folder  = module.ou.name
-#  role    = google_project_iam_custom_role.role-svc-check-snapshots.role_id
-#
-#  members = [
-#    "serviceAccount:${google_service_account.svc-check-snapshots.account_id}@${module.security.name}.iam.gserviceaccount.com",
-#  ]
-#
-#  depends_on = [module.ou]
-#}
 
 resource "google_pubsub_topic" "pubsub-snapshots" {
   name = "pubsub-${module.snapshots.name}-${random_id.random.hex}"
@@ -283,7 +270,7 @@ resource "google_secret_manager_secret_iam_member" "member" {
   project = module.snapshots.id
   secret_id = google_secret_manager_secret.secret-basic.id
   role = google_organization_iam_custom_role.role-svc-check-snapshots.name
-  member = "serviceAccount:${google_service_account.svc-check-snapshots.account_id}@${module.security.id}.iam.gserviceaccount.com"
+  member = "serviceAccount:${google_service_account.svc-check-snapshots.email}"
 }
 
 resource "google_cloudfunctions_function" "function-snapshots" {
@@ -305,10 +292,10 @@ resource "google_cloudfunctions_function" "function-snapshots" {
   depends_on = [google_project_service.cloud_functions, google_project_service.cloud_build]
 }
 
-resource "google_cloudfunctions_function_iam_member" "member" {
-  project = module.snapshots.id
-  region = google_cloudfunctions_function.function-snapshots.region
-  cloud_function = google_cloudfunctions_function.function-snapshots.name
-  role = google_organization_iam_custom_role.role-svc-check-snapshots.name
-  member = "serviceAccount:${google_service_account.svc-check-snapshots.email}"
-}
+#resource "google_cloudfunctions_function_iam_member" "member" {
+#  project = module.snapshots.id
+#  region = google_cloudfunctions_function.function-snapshots.region
+#  cloud_function = google_cloudfunctions_function.function-snapshots.name
+#  role = google_organization_iam_custom_role.role-svc-check-snapshots.name
+#  member = "serviceAccount:${google_service_account.svc-check-snapshots.email}"
+#}
