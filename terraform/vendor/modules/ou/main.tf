@@ -106,6 +106,14 @@ resource "google_service_account" "svc-check-snapshots" {
   depends_on = [module.snapshots]
 }
 
+resource "google_project_iam_binding" "project" {
+  project = module.snapshots.id
+  role    = google_organization_iam_custom_role.role-svc-check-snapshots.name
+  members = [
+    "serviceAccount:${google_service_account.svc-check-snapshots.email}",
+  ]
+}
+
 resource "google_pubsub_topic" "pubsub-snapshots" {
   name = "pubsub-${module.snapshots.name}-${random_id.random.hex}"
 
