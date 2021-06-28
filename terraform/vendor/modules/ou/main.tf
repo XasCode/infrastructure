@@ -70,6 +70,7 @@ resource "google_organization_iam_custom_role" "role-svc-check-snapshots" {
   description = "Role / permissions to assign to service account for automatically setting up disk snapshots."
   permissions = [
     "compute.disks.list",
+    "compute.projects.get",
     "compute.snapshots.list",
     "compute.instances.list",
     "compute.regions.list",
