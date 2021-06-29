@@ -1,6 +1,7 @@
 resource "google_storage_bucket" "bucket" {
   name = "snapshots-bucket-${random_id.random.hex}"
   project = module.snapshots.id
+  force_destroy = true
 }
 
 resource "google_storage_bucket" "backup_records" {

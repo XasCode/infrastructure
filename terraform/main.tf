@@ -64,3 +64,5 @@ module randd {
   billing_account = var.billing_account
   organization_id = var.organization_id
 }
+
+provider "archive" {}

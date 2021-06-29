@@ -39,5 +39,3 @@ module "snapshots" {
   environment    = var.environment
 }
 
-provider "archive" {}
-
