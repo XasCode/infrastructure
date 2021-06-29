@@ -13,7 +13,3 @@ variable "billing_account" {
 variable "environment" {
   type = string
 }
-
-variable "sg" {
-  type = string
-}
