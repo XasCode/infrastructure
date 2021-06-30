@@ -10,5 +10,9 @@
   "ou": {
     "comment": "https://github.com/xascode/tf_modules.git//ou",
     "source": "../submodules/tf_modules/ou"
+  },
+  "project": {
+    "comment": "https://github.com/xascode/tf_modules.git//project",
+    "source": "../submodules/tf_modules/project"
   }
 }
