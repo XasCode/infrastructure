@@ -8,3 +8,11 @@ output "projects" {
     ]
   ])
 }
+
+output "folders" {
+  value = flatten([
+    module.corp.folders,
+    module.mkting.folders,
+    module.randd.folders,
+  ])
+}

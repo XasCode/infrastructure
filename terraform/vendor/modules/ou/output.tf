@@ -13,3 +13,9 @@ output "projects" {
     module.terraform,
   ]
 }
+
+output "folders" {
+  value = [
+    module.ou,
+  ]
+}
