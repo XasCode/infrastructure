@@ -65,11 +65,25 @@ module randd {
   organization_id = var.organization_id
 }
 
-
 module "snapshots" {
  source = "./vendor/modules/project"
   
   name   = "snapshots"
+  parent = {
+    name = module.corp.name
+    path = module.corp.path
+  }
+
+  billing_account = var.billing_account
+
+  envs   = [ "devl", "test" ]
+  environment    = var.environment
+}
+
+module "projects" {
+ source = "./vendor/modules/project"
+  
+  name   = "projects"
   parent = {
     name = module.corp.name
     path = module.corp.path

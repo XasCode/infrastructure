@@ -4,3 +4,6 @@
 [submodule "submodules/snapshots"]
 	path = submodules/snapshots
 	url = https://github.com/XasCode/snapshots.git
+[submodule "submodules/projects"]
+	path = submodules/projects
+	url = https://github.com/XasCode/projects
