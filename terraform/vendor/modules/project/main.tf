@@ -27,7 +27,8 @@ resource "google_project" "project" {
 }
 
 resource "google_compute_resource_policy" "auto_snapshot_policy" {
-  project = google_project.project.project_id
+  count   = contains(var.envs, var.environment) ? 1 : 0
+  project = google_project.project[0].project_id
   name    = "auto-us-central1-backups"
   region  = "us-central1"
   snapshot_schedule_policy {
