@@ -7,3 +7,6 @@
 [submodule "submodules/projects"]
 	path = submodules/projects
 	url = https://github.com/XasCode/projects
+[submodule "submodules/build-api"]
+	path = submodules/build-api
+	url = https://github.com/XasCode/build-api.git
