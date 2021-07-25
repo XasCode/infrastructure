@@ -109,3 +109,18 @@ module "test" {
   envs   = [ "devl", "test" ]
   environment    = var.environment
 }
+
+module "choreographer" {
+ source = "./vendor/modules/project"
+  
+  name   = "choreographer"
+  parent = {
+    name = module.env.name
+    path = module.env.path
+  }
+
+  billing_account = var.billing_account
+
+  envs   = [ "devl", "test" ]
+  environment    = var.environment
+}
