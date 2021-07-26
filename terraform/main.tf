@@ -110,6 +110,7 @@ module "projects" {
 //   environment    = var.environment
 // }
 
+/*
 module "choreographer" {
   source = "./vendor/modules/choreographer"
   
@@ -131,3 +132,4 @@ module "choreographer" {
   tf_org = var.tf_org
   tf_token = var.tf_token
 }
+*/
