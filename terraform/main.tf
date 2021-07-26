@@ -95,23 +95,24 @@ module "projects" {
   environment    = var.environment
 }
 
-module "test" {
- source = "./vendor/modules/project"
-  
-  name   = "test"
-  parent = {
-    name = module.corp.name
-    path = module.corp.path
-  }
+// module "test" {
+//  source = "./vendor/modules/project"
+//   
+//   name   = "test"
+//   parent = {
+//     name = module.corp.name
+//     path = module.corp.path
+//   }
+// 
+//   billing_account = var.billing_account
+// 
+//   envs   = [ "devl", "test" ]
+//   environment    = var.environment
+// }
 
-  billing_account = var.billing_account
-
-  envs   = [ "devl", "test" ]
-  environment    = var.environment
-}
-
+/*
 module "choreographer" {
- source = "./vendor/modules/project"
+ source = "./vendor/modules/choreographer"
   
   name   = "choreographer"
   parent = {
@@ -119,8 +120,16 @@ module "choreographer" {
     path = module.env.path
   }
 
+  organization_id = var.organization_id
   billing_account = var.billing_account
 
   envs   = [ "devl", "test" ]
   environment    = var.environment
+
+  build = var.build
+  gh_org = var.gh_org
+  gh_token = var.gh_token
+  tf_org = var.tf_org
+  tf_token = var.tf_token
 }
+*/

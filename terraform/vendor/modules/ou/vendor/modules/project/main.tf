@@ -26,6 +26,8 @@ resource "google_project" "project" {
   depends_on = [random_id.project, module.prj_container]
 }
 
+
+
 #######
 ##### TODO: Should move into module for resource. #####
 #######

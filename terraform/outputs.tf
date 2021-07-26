@@ -6,7 +6,7 @@ output "projects" {
     [
       module.snapshots,
       module.projects,
-      module.test,
+      module.choreographer
     ]
   ])
 }

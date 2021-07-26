@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "terrafile": "^0.1.14"
+  },
+  "scripts": {
+    "terrafile": "terrafile install"
+  }
+}

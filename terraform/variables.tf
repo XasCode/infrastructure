@@ -13,3 +13,23 @@ variable "billing_account" {
 variable "environment" {
   type = string
 }
+
+variable "tf_org" {
+  type = string
+}
+
+variable "tf_token" {
+  type = string
+}
+
+variable "gh_org" {
+  type = string
+}
+
+variable "gh_token" {
+  type = string
+}
+
+variable "build" {
+  type = string
+}

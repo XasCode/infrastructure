@@ -14,5 +14,9 @@
   "project": {
     "comment": "https://github.com/xascode/tf_modules.git//project",
     "source": "../submodules/tf_modules/project"
+  },
+  "choreographer": {
+    "comment": "https://github.com/xascode/tf_modules.git//choreographer",
+    "source": "../submodules/tf_modules/choreographer"
   }
 }
