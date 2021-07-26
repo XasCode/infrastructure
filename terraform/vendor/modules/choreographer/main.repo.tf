@@ -1,3 +1,4 @@
+/*
 resource "google_sourcerepo_repository" "choreographer-repo" {
   count        = contains(var.envs, var.environment) ? 1 : 0
 
@@ -6,3 +7,4 @@ resource "google_sourcerepo_repository" "choreographer-repo" {
 
   depends_on = [ google_project_service.sourcerepo[0] ]
 }
+*/

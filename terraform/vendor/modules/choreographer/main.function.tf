@@ -1,3 +1,4 @@
+/*
 resource "google_cloudfunctions_function" "function-choreographer" {
   count        = contains(var.envs, var.environment) ? 1 : 0
 
@@ -16,3 +17,4 @@ resource "google_cloudfunctions_function" "function-choreographer" {
 
   depends_on = [google_project_service.cloud_functions[0]] #, google_project_service.cloud_build]
 }
+*/

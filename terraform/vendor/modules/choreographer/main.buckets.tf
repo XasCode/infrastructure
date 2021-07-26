@@ -1,3 +1,4 @@
+/*
 resource "google_storage_bucket" "bucket" {
   count        = contains(var.envs, var.environment) ? 1 : 0
 
@@ -12,3 +13,4 @@ resource "google_storage_bucket_object" "archive" {
   bucket = google_storage_bucket.bucket[count.index].name
   source = data.archive_file.srcfiles[count.index].output_path
 }
+*/

@@ -1,3 +1,4 @@
+/*
 data "archive_file" "srcfiles" {
   count        = contains(var.envs, var.environment) ? 1 : 0
 
@@ -5,3 +6,4 @@ data "archive_file" "srcfiles" {
   output_path = "api.zip"
   source_dir  = "./src"
 }
+*/

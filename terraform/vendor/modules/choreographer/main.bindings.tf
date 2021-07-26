@@ -1,3 +1,4 @@
+/*
 resource "google_cloudfunctions_function_iam_binding" "binding" {
   count        = contains(var.envs, var.environment) ? 1 : 0
 
@@ -43,7 +44,6 @@ resource "google_project_iam_binding" "project" {
   ]
 }
 
-
 resource "google_sourcerepo_repository_iam_binding" "binding" {
   count        = contains(var.envs, var.environment) ? 1 : 0
 
@@ -54,3 +54,4 @@ resource "google_sourcerepo_repository_iam_binding" "binding" {
     "serviceAccount:${module.project.number}@cloudbuild.gserviceaccount.com",
   ]
 }
+*/

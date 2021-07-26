@@ -1,3 +1,4 @@
+/*
 resource "tfe_workspace" "workspace" {
   count        = contains(var.envs, var.environment) ? 1 : 0
 
@@ -37,3 +38,4 @@ resource "tfe_notification_configuration" "test" {
   workspace_id     = tfe_workspace.workspace[count.index].id
   token            = var.build
 }
+*/
