@@ -1,6 +1,4 @@
-/*
 resource "github_repository" "repository" {
-  // only create one
   count = var.environment == "devl" ? 1 : 0
 
   name             = var.name
@@ -21,4 +19,3 @@ data "github_repository" "repository" {
 
   full_name = "${var.gh_org}/${var.name}"
 }
-*/
