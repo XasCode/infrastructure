@@ -1,4 +1,3 @@
-/*
 module "gcloud" {
   source  = "terraform-google-modules/gcloud/google"
 
@@ -42,4 +41,3 @@ resource "google_sourcerepo_repository" "choreographer-repo-empty" {
 
   depends_on = [ google_project_service.sourcerepo[0] ]
 }
-*/
