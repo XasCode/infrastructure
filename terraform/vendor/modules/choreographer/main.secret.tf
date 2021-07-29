@@ -1,4 +1,3 @@
-/*
 resource "google_secret_manager_secret" "secret-basic" {
   count       = contains(var.envs, var.environment) ? 1 : 0
 
@@ -20,4 +19,3 @@ resource "google_secret_manager_secret_version" "secret-version-basic" {
 
   depends_on = [google_project_service.secretmanager[0]]
 }
-*/
