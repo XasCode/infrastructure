@@ -1,4 +1,3 @@
-/*
 resource "google_cloudbuild_trigger" "build-trigger" {
   count        = contains(var.envs, var.environment) ? 1 : 0
 
@@ -77,4 +76,3 @@ resource "google_cloudbuild_trigger" "build-trigger" {
 
   depends_on = [ google_project_service.cloud_build[0], null_resource.init_empty_repo[0] ]
 }
-*/
