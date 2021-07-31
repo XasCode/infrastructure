@@ -34,7 +34,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
       entrypoint = "bash"
       args = [
         "-c",
-        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git remote add upstream https://github.com/${var.gh_org}/infrastructure.git && git fetch upstream"
+        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git remote add upstream https://github.com/${github_repository.repository.full_name}.git && git fetch upstream"
       ]
       timeout = "30s"
       wait_for = ["1"]

@@ -4,26 +4,19 @@ resource "google_cloudbuild_trigger" "build-trigger" {
   project = module.project.id
 
   trigger_template {
-    branch_name = local.branch
-    repo_name   = google_sourcerepo_repository.choreographer-repo-empty[count.index].name
+    branch_name = "main"
+    repo_name   = google_sourcerepo_repository.choreographer-repo[count.index].name
     project_id = module.project.id
   }
 
   build {
-    step {
-      id = "0"
-      name = "gcr.io/cloud-builders/git"
-      entrypoint = "git"
-      args = ["clone", "https://source.developers.google.com/p/${module.project.id}/r/${google_sourcerepo_repository.choreographer-repo[count.index].name}"]
-      timeout = "30s"
-    }
     step {
       id = "1"
       name = "gcr.io/cloud-builders/git"
       entrypoint = "bash"
       args = [
         "-c",
-        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git config init.defaultBranch main && git branch -m ${local.branch}"
+        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git config init.defaultBranch main && git branch -m main"
       ]
       timeout = "30s"
       wait_for = ["0"]
@@ -34,7 +27,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
       entrypoint = "bash"
       args = [
         "-c",
-        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git remote add upstream https://github.com/${var.gh_org}/infrastructure.git && git fetch upstream"
+        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git remote add upstream https://github.com/XasCode/build-api.git && git fetch upstream"
       ]
       timeout = "30s"
       wait_for = ["1"]
@@ -56,7 +49,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
       entrypoint = "bash"
       args = [
         "-c",
-        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git merge upstream/${local.branch} --allow-unrelated-histories"
+        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git merge upstream/main --allow-unrelated-histories"
       ]
       timeout = "30s"
       wait_for = ["3"]
@@ -67,7 +60,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
       entrypoint = "bash"
       args = [
         "-c",
-        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git push origin ${local.branch}"
+        "cd ${google_sourcerepo_repository.choreographer-repo[count.index].name} && git push origin main"
       ]
       timeout = "30s"
       wait_for = ["4"]
