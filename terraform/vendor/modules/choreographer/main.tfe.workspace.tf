@@ -6,13 +6,13 @@ resource "tfe_workspace" "choreographer" {
   auto_apply            = true
   file_triggers_enabled = false
   queue_all_runs        = true
-  speculative_enable    = false
+  speculative_enabled   = false
   working_directory     = "service"
   vcs_repo {
-    identifer           = "${var.gh_org}/infrastructure"
+    identifier          = "${var.gh_org}/infrastructure"
     branch              = var.environment == "devl" ? "main" : var.environment
     ingress_submodules  = false
-    oauth_token_id     = tfe_oauth_client.xascode[count.index].oauth_token_id
+    oauth_token_id      = tfe_oauth_client.xascode[count.index].oauth_token_id
   }
 }
 
