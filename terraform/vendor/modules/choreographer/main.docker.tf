@@ -9,6 +9,6 @@ resource "docker_image" "helloworld" {
   pull_triggers = [data.docker_registry_image.node-14-slim.sha256_digest]
   build {
     path = "./service"
-    tag = "helloworld:latest"
+    tag = ["helloworld:latest"]
   }
 }
