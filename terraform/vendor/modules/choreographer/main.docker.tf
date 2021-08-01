@@ -6,6 +6,9 @@ resource "null_resource" "docker" {
     provisioner "local-exec" {
     command = <<EOH
 curl -fsSL https://get.docker.com/rootless | sh
+DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" \
+  ~/bin/dockerd-rootless.sh \
+  -H tcp://0.0.0.0:2376
 EOH
   }
 }
