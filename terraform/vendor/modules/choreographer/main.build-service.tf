@@ -12,17 +12,24 @@ resource "google_cloudbuild_trigger" "choreographer-trigger" {
   build {
     step {
       id = "0"
-      name = "gcr.io/cloud-builders/gcloud"
+      name = "gcr.io/cloud-builders/docker"
       args = [
         "build", 
         "-t", 
         "gcr.io/${module.project.id}/choreographer-run-${var.environment}", 
         "./service"
       ]
-      images = [
-        "gcr.io/${module.project.id}/choreographer-run-${var.environment}",
+      timeout = "120s"
+    }
+    step {
+      id = "1"
+      name = "gcr.io/cloud-builders/docker"
+      args = [
+        "push", 
+        "gcr.io/${module.project.id}/choreographer-run-${var.environment}", 
       ]
       timeout = "120s"
+      wait_for = ["0"]
     }
   }
 
