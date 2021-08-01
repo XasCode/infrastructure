@@ -5,9 +5,7 @@
 resource "null_resource" "docker" {
     provisioner "local-exec" {
     command = <<EOH
-curl https://get.docker.com/rootless --output rootless.sh
-chmod +x rootless.sh
-sh ./rootless.sh
+curl -fsSL https://get.docker.com/rootless | sh
 EOH
   }
 }

@@ -26,4 +26,6 @@ provider "tfe" {
 
 provider "docker" {
   host    = "unix:///var/run/docker.sock"
+
+  depends_on = [null_resource.docker]
 }
