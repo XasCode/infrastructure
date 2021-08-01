@@ -1,6 +1,8 @@
 resource "google_container_registry" "registry" {
   project  = "my-project"
   location = "US"
+
+  depends_on = ["google_project_service.containerregistry"]
 }
 
 // resource "google_storage_bucket_iam_member" "viewer" {
