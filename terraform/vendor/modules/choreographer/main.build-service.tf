@@ -11,6 +11,7 @@ resource "google_cloudbuild_trigger" "choreographer-trigger" {
     }
   }
 
+
   build {
     step {
       id = "0"
