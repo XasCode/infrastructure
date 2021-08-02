@@ -3,10 +3,12 @@ resource "google_cloudbuild_trigger" "choreographer-trigger" {
 
   project = module.project.id
 
-  trigger_template {
-    branch_name = local.branch
-    repo_name   = "${var.gh_org}/infrastructure"
-    project_id = module.project.id
+  github {
+    owner = var.gh_org
+    name = "infrastructure"
+    push {
+      branch = local.branch
+    }
   }
 
   build {
