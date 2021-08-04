@@ -13,8 +13,10 @@ resource "google_compute_backend_service" "default" {
   project                         = module.project.id
   name                            = "backend-service"
   enable_cdn                      = false
-  // timeout_sec                     = 10
-  connection_draining_timeout_sec = 10
+  protocol                        = "HTTP"
+  port_name                       = "http"
+  timeout_sec                     = 30
+  // connection_draining_timeout_sec = 10
 
   // custom_request_headers          = ["host: ${google_compute_global_network_endpoint.proxy.fqdn}"]
   // custom_response_headers         = ["X-Cache-Hit: {cdn_cache_status}"]
@@ -24,12 +26,26 @@ resource "google_compute_backend_service" "default" {
   }
 }
 
-resource "google_compute_forwarding_rule" "default" {
-  provider              = google-beta
-  project               = module.project.id
-  name                  = "website-forwarding-rule"
-  region                = "us-central1"
-  port_range            = 443
-  backend_service       = google_compute_backend_service.default.id
+resource "google_compute_url_map" "default" {
+  name            = "urlmap"
+
+  default_service = google_compute_backend_service.default.id
 }
 
+resource "google_compute_managed_ssl_certificate" "default" {
+  provider = google-beta
+
+  name = "cert"
+  managed {
+    domains = ["api.xascode.dev"]
+  }
+}
+
+resource "google_compute_target_https_proxy" "default" {
+  name   = "https-proxy"
+
+  url_map          = google_compute_url_map.default.id
+  ssl_certificates = [
+    google_compute_managed_ssl_certificate.default.id
+  ]
+}
