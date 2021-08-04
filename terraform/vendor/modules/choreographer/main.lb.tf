@@ -43,6 +43,10 @@ resource "google_compute_managed_ssl_certificate" "default" {
   }
 }
 
+resource "google_compute_global_address" "default" {
+  name = "lb-address"
+}
+
 resource "google_compute_target_https_proxy" "default" {
   name    = "https-proxy"
   project = module.project.id
@@ -51,4 +55,12 @@ resource "google_compute_target_https_proxy" "default" {
   ssl_certificates = [
     google_compute_managed_ssl_certificate.default.id
   ]
+}
+
+resource "google_compute_global_forwarding_rule" "default" {
+  name   = "lb"
+
+  target = google_compute_target_https_proxy.default.id
+  port_range = "443"
+  ip_address = google_compute_global_address.default.address
 }
