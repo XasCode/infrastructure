@@ -23,3 +23,13 @@ resource "google_compute_backend_service" "default" {
     group = google_compute_region_network_endpoint_group.cloudrun_neg.id
   }
 }
+
+resource "google_compute_forwarding_rule" "default" {
+  provider              = google-beta
+  project               = module.project.id
+  name                  = "website-forwarding-rule"
+  region                = "us-central1"
+  port_range            = 443
+  backend_service       = google_compute_backend_service.default.id
+}
+
