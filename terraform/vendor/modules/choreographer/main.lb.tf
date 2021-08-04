@@ -33,21 +33,6 @@ resource "google_compute_url_map" "default" {
   default_service = google_compute_backend_service.default.id
 }
 
-resource "google_compute_managed_ssl_certificate" "default" {
-  provider = google-beta
-  project  = module.project.id
-
-  name = "cert"
-  managed {
-    domains = ["api.xascode.dev"]
-  }
-}
-
-resource "google_compute_global_address" "default" {
-  name = "lb-address"
-  project = module.project.id
-}
-
 resource "google_compute_target_https_proxy" "default" {
   name    = "https-proxy"
   project = module.project.id
@@ -67,19 +52,3 @@ resource "google_compute_global_forwarding_rule" "default" {
   ip_address = google_compute_global_address.default.address
 }
 
-resource "google_dns_managed_zone" "xascode" {
-  name        = "xascode"
-  project     = module.project.id
-  dns_name    = "xascode.dev."
-  description = "Example DNS zone"
-}
-
-resource "google_dns_record_set" "api" {
-  provider = "google-beta"
-  project  = module.project.id
-  managed_zone = google_dns_managed_zone.xascode.name
-  name         = "api.xascode.dev."
-  type         = "A"
-  rrdatas      = [google_compute_global_address.default.address]
-  ttl          = 86400
-}
