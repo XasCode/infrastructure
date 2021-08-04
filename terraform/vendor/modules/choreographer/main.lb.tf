@@ -45,7 +45,7 @@ resource "google_compute_managed_ssl_certificate" "default" {
 
 resource "google_compute_target_https_proxy" "default" {
   name    = "https-proxy"
-  proejct = module.project.id
+  project = module.project.id
 
   url_map          = google_compute_url_map.default.id
   ssl_certificates = [
