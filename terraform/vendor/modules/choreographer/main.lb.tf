@@ -28,12 +28,14 @@ resource "google_compute_backend_service" "default" {
 
 resource "google_compute_url_map" "default" {
   name            = "urlmap"
+  project         = module.project.id
 
   default_service = google_compute_backend_service.default.id
 }
 
 resource "google_compute_managed_ssl_certificate" "default" {
   provider = google-beta
+  project  = module.project.id
 
   name = "cert"
   managed {
@@ -42,7 +44,8 @@ resource "google_compute_managed_ssl_certificate" "default" {
 }
 
 resource "google_compute_target_https_proxy" "default" {
-  name   = "https-proxy"
+  name    = "https-proxy"
+  proejct = module.project.id
 
   url_map          = google_compute_url_map.default.id
   ssl_certificates = [
