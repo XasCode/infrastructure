@@ -6,7 +6,7 @@ resource "google_dns_managed_zone" "xascode" {
 }
 
 resource "google_dns_record_set" "api" {
-  provider = "google-beta"
+  provider = google-beta
   project  = module.project.id
   managed_zone = google_dns_managed_zone.xascode.name
   name         = "api.xascode.dev."
