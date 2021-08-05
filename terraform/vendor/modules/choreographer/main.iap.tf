@@ -8,3 +8,11 @@ resource "google_iap_web_backend_service_iam_binding" "binding" {
 
   depends_on = [ google_project_service.iap[0] ]
 }
+
+resource "google_iap_brand" "project_brand" {
+  support_email     = "contact@xascode.dev"
+  application_title = "XasCode"
+  project           = module.project.id
+
+  depends_on = [ google_project_service.iap[0] ]
+}
