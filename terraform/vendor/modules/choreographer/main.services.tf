@@ -69,3 +69,15 @@ resource "google_project_service" "run" {
   }
   disable_dependent_services = true
 }
+
+resource "google_project_service" "iap" {
+  count        = contains(var.envs, var.environment) ? 1 : 0
+
+  project = module.project.id
+  service = "iap.googleapis.com"
+  timeouts {
+    create = "3m"
+    update = "6m"
+  }
+  disable_dependent_services = true
+}
