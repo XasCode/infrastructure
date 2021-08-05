@@ -10,7 +10,7 @@ resource "google_iap_web_backend_service_iam_binding" "binding" {
 }
 
 resource "google_iap_brand" "project_brand" {
-  support_email     = "contact@xascode.dev"
+  support_email     = "justin@xascode.dev"
   application_title = "XasCode"
   project           = module.project.id
 
