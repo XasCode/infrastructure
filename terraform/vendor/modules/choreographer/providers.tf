@@ -9,9 +9,6 @@ terraform {
     tfe = {
       source = "hashicorp/tfe"
     }
-    google-beta = {
-      source = "hashicorp/google-beta"
-    }
   }
 }
 
@@ -22,8 +19,4 @@ provider "github" {
 
 provider "tfe" {
   token    = var.tf_token
-}
-
-provider "google-beta" {
-  project = module.project.id
 }
