@@ -12,7 +12,7 @@ source "docker" "helloworld" {
   commit = true
   changes = [
     "WORKDIR /usr/src/app",
-    "CMD [\"node\", \"index.js;\"]"
+    "ENTRYPOINT [\"node\", \"index.js\"]"
   ]
 }
 
@@ -22,8 +22,14 @@ build {
     "source.docker.helloworld"
   ]
 
+  provisioner "shell" {
+    inline = [
+      "mkdir -p /usr/src/app",
+    ]
+  }
+
   provisioner "file" {
-    source      = "./service"
+    source      = "./service/"
     destination = "/usr/src/app"
   }
 
@@ -33,12 +39,9 @@ build {
       "npm install --only=production"
     ]
   }
-
   post-processors {
-    post-processor "docker-import" {
-        repository =  "myrepo/myimage"
-        tag = ["latest"]
-      }
-    post-processor "docker-push" {}
+    post-processor "docker-tag" {
+      repository = "us.gcr.io/choreographer-a03409"
+    }
   }
 }
