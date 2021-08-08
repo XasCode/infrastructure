@@ -122,7 +122,7 @@ module "choreographer" {
   }
 
   managed = [
-    module.test.project_name
+    module.test.name
   ]
 
   organization_id = var.organization_id
