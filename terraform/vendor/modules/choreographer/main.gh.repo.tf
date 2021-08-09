@@ -19,5 +19,5 @@ data "github_repository" "repository" {
 
   full_name = "${var.gh_org}/${var.managed[count.index].name}"
 
-  depends_on = github_repository.repository
+  depends_on = [github_repository.repository]
 }
