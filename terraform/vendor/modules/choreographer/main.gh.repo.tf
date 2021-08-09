@@ -18,4 +18,6 @@ data "github_repository" "repository" {
   count = length(var.managed)
 
   full_name = "${var.gh_org}/${var.managed[count.index].name}"
+
+  depends_on = github_repository.repository
 }
