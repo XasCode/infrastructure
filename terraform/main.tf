@@ -33,40 +33,6 @@ module "corp" {
   organization_id = var.organization_id
 }
 
-/*
-module mkting {
-  source = "./vendor/modules/ou"
-
-  name   = "marketing"
-  parent = {
-    name = module.corp.name
-    path = module.corp.path
-  }
-
-  envs = [ "devl", "test" ]
-  environment  = var.environment
-
-  billing_account = var.billing_account
-  organization_id = var.organization_id
-}
-
-module randd {
-  source = "./vendor/modules/ou"
-
-  name   = "randd"
-  parent = {
-    name = module.corp.name
-    path = module.corp.path
-  }
-
-  envs = [ "devl", "test" ]
-  environment  = var.environment
-
-  billing_account = var.billing_account
-  organization_id = var.organization_id
-}
-*/
-
 module "snapshots" {
  source = "./vendor/modules/project"
   
@@ -122,7 +88,7 @@ module "choreographer" {
   }
 
   managed = [
-    module.test.name
+    module.test
   ]
 
   organization_id = var.organization_id

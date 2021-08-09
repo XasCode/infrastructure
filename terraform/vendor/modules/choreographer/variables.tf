@@ -53,5 +53,12 @@ variable "build" {
 }
 
 variable "managed" {
-  type = list(string)
+  type = list(
+    object({
+      path   = string
+      name   = string
+      id     = string
+      number = string
+    })
+  )
 }

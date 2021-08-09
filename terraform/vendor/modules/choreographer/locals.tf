@@ -1,12 +1,32 @@
-// data "terraform_remote_state" "terraform-devl" {
-//   backend = "remote"
-//   config = {
-//     organization = "xascode"
-//     workspaces = {
-//       name = "terraform-devl"
-//     }
-//   }
-// }
+data "terraform_remote_state" "terraform-devl" {
+  backend = "remote"
+  config = {
+    organization = "xascode"
+    workspaces = {
+      name = "terraform-devl"
+    }
+  }
+}
+
+data "terraform_remote_state" "terraform-test" {
+  backend = "remote"
+  config = {
+    organization = "xascode"
+    workspaces = {
+      name = "terraform-test"
+    }
+  }
+}
+
+data "terraform_remote_state" "terraform-prod" {
+  backend = "remote"
+  config = {
+    organization = "xascode"
+    workspaces = {
+      name = "terraform-prod"
+    }
+  }
+}
 
 locals {
   // project = [for x in data.terraform_remote_state.terraform-devl.outputs.projects: x if x.path == var.project_path][0]

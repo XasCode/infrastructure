@@ -1,7 +1,7 @@
 resource "github_repository" "repository" {
-  count = var.environment == "devl" ? 1 : 0
+  count = var.environment == "devl" ? length(var.managed) : 0
 
-  name             = var.name
+  name             = var.managed[count.index].name
   description      = "Automated"
 
   visibility       = "public"
@@ -15,7 +15,7 @@ resource "github_repository" "repository" {
 }
 
 data "github_repository" "repository" {
-  count = var.environment == "devl" ? 0 : 1
+  count = length(var.managed)
 
-  full_name = "${var.gh_org}/${var.name}"
+  full_name = "${var.gh_org}/${var.managed[count.index].name}"
 }
