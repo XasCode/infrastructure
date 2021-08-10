@@ -1,3 +1,14 @@
+resource "google_project_service" "sourcerepo" {
+  count = var.environment == "devl" ? length(var.managed) : 0
+  project = var.managed[count.index].id
+  service = "sourcerepo.googleapis.com"
+  timeouts {
+    create = "3m"
+    update = "6m"
+  }
+  disable_dependent_services = true
+}
+/*
 resource "google_project_service" "cloud_functions" {
   count        = contains(var.envs, var.environment) ? 1 : 0
 
@@ -27,18 +38,6 @@ resource "google_project_service" "secretmanager" {
 
   project = module.project.id
   service = "secretmanager.googleapis.com"
-  timeouts {
-    create = "3m"
-    update = "6m"
-  }
-  disable_dependent_services = true
-}
-
-resource "google_project_service" "sourcerepo" {
-  count        = contains(var.envs, var.environment) ? 1 : 0
-
-  project = module.project.id
-  service = "sourcerepo.googleapis.com"
   timeouts {
     create = "3m"
     update = "6m"
@@ -81,3 +80,4 @@ resource "google_project_service" "iap" {
   }
   disable_dependent_services = true
 }
+*/
