@@ -3,7 +3,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
   project = var.managed[count.index].id
 
   pubsub_config {
-    topic = google_pubsub_topic.topic[count.index].name
+    topic = google_pubsub_topic.topic[count.index].id
   }
 
   build {
