@@ -10,9 +10,8 @@ resource "google_project_service" "sourcerepo" {
 }
 
 resource "google_project_service" "cloud_build" {
-  count        = contains(var.envs, var.environment) ? 1 : 0
-
-  project = module.project.id
+  count = var.environment == "devl" ? length(var.managed) : 0
+  project = var.managed[count.index].id
   service = "cloudbuild.googleapis.com"
   timeouts {
     create = "3m"
