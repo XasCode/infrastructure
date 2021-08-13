@@ -23,9 +23,9 @@ data "github_repository" "repository" {
 }
 
 resource "github_repository_file" "gh_repo_file_keep" {
-  count = length(var.managed)
+  count = var.environment == "devl" ? length(var.managed) : 0
 
-  repository          = data.github_repository.repository.name
+  repository          = data.github_repository.repository[count.index].name
   branch              = local.branch
   file                = "src/.keep"
   content             = <<-EOT
@@ -38,9 +38,9 @@ resource "github_repository_file" "gh_repo_file_keep" {
 }
 
 resource "github_repository_file" "gh_repo_file_locals" {
-  count = length(var.managed)
+  count = var.environment == "devl" ? length(var.managed) : 0
 
-  repository          = data.github_repository.repository.name
+  repository          = data.github_repository.repository[count.index].name
   branch              = local.branch
   file                = "terraform/locals.tf"
   content             = <<-EOT
@@ -55,9 +55,9 @@ resource "github_repository_file" "gh_repo_file_locals" {
 }
 
 resource "github_repository_file" "gh_repo_file_archive" {
-  count = length(var.managed)
+  count = var.environment == "devl" ? length(var.managed) : 0
 
-  repository          = data.github_repository.repository.name
+  repository          = data.github_repository.repository[count.index].name
   branch              = local.branch
   file                = "terraform/main.archive.tf"
   content             = <<-EOT
@@ -69,7 +69,7 @@ resource "github_repository_file" "gh_repo_file_archive" {
 
     resource "google_storage_bucket_object" "archive" {
       name   = "src-$${filemd5(data.archive_file.srcfiles.output_path)}.zip"
-      bucket = ${google_storage_bucket.bucket.name}
+      bucket = ${google_storage_bucket.bucket[count.index].name}
       source = data.archive_file.srcfiles.output_path
     }
     EOT
