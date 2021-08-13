@@ -73,3 +73,14 @@ resource "google_cloudbuild_trigger" "build-trigger" {
 
   depends_on = [ google_project_service.cloud_build[0] ]
 }
+
+resource "google_sourcerepo_repository_iam_binding" "binding" {
+  count = var.environment == "devl" ? length(var.managed) : 0
+
+  project = var.managed[count.index].id
+  repository = google_sourcerepo_repository.repository[count.index].name
+  role = "roles/source.writer"
+  members = [
+    "serviceAccount:${var.managed[count.index].number}@cloudbuild.gserviceaccount.com",
+  ]
+}
