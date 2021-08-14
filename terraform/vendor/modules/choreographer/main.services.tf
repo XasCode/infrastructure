@@ -1,5 +1,5 @@
 resource "google_project_service" "sourcerepo" {
-  count = var.environment == "devl" ? length(var.managed) : 0
+  count   = contains(var.envs, var.environment) ? length(var.managed) : 0
   project = var.managed[count.index].id
   service = "sourcerepo.googleapis.com"
   timeouts {
@@ -10,9 +10,20 @@ resource "google_project_service" "sourcerepo" {
 }
 
 resource "google_project_service" "cloud_build" {
-  count = var.environment == "devl" ? length(var.managed) : 0
+  count   = contains(var.envs, var.environment) ? length(var.managed) : 0
   project = var.managed[count.index].id
   service = "cloudbuild.googleapis.com"
+  timeouts {
+    create = "3m"
+    update = "6m"
+  }
+  disable_dependent_services = true
+}
+
+resource "google_project_service" "serviceusage" {
+  count   = contains(var.envs, var.environment) ? length(var.managed) : 0
+  project = var.managed[count.index].id
+  service = "serviceusage.googleapis.com"
   timeouts {
     create = "3m"
     update = "6m"
