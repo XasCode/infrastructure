@@ -1,5 +1,5 @@
 resource "google_cloudbuild_trigger" "build-trigger" {
-  count = var.environment == "devl" ? length(var.managed) : 0
+  count   = contains(var.envs, var.environment) ? length(var.managed) : 0
   project = var.managed[count.index].id
 
   pubsub_config {

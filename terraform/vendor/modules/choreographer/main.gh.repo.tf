@@ -23,7 +23,7 @@ data "github_repository" "repository" {
 }
 
 resource "github_repository_file" "gh_repo_file_keep" {
-  count = var.environment == "devl" ? length(var.managed) : 0
+  count               = contains(var.envs, var.environment) ? length(var.managed) : 0
 
   repository          = data.github_repository.repository[count.index].name
   branch              = local.branch
