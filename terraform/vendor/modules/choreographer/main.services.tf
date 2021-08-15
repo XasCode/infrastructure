@@ -30,6 +30,17 @@ resource "google_project_service" "serviceusage" {
   }
   disable_dependent_services = true
 }
+
+resource "google_project_service" "cloudresourcemanager" {
+  count   = contains(var.envs, var.environment) ? length(var.managed) : 0
+  project = var.managed[count.index].id
+  service = "cloudresourcemanager.googleapis.com"
+  timeouts {
+    create = "3m"
+    update = "6m"
+  }
+  disable_dependent_services = true
+}
 /*
 resource "google_project_service" "cloud_functions" {
   count        = contains(var.envs, var.environment) ? 1 : 0

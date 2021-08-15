@@ -26,15 +26,6 @@ resource "google_pubsub_topic_iam_binding" "binding" {
 }
 
 // End enabling notifications
-/*
-resource "google_storage_bucket" "bucket" {
-  count = var.environment == "devl" ? length(var.managed) : 0
-  project = var.managed[count.index].id
-  name = "${var.tf_org}_${var.managed[count.index].name}_source_bucket"
-  force_destroy = true
-}
-*/
-
 resource "google_storage_bucket" "bucket" {
   count   = contains(var.envs, var.environment) ? length(var.managed) : 0
   project = var.managed[count.index].id
