@@ -88,7 +88,7 @@ resource "github_branch" "branch" {
 }
 
 data "github_branch" "branch" {
-  count = var.environment == "devl" ? 0 : length(var.managed)
+  count = length(var.managed)
   repository = data.github_repository.repository[count.index].name
   branch     = local.branch
 }
