@@ -83,12 +83,12 @@ resource "github_repository_file" "gh_repo_file_archive" {
 
 resource "github_branch" "branch" {
   count = var.environment == "devl" ? 0 : length(var.managed)
-  repository = data.github_repository.repository[count.index].full_name
+  repository = data.github_repository.repository[count.index].name
   branch     = local.branch
 }
 
 data "github_branch" "branch" {
   count = var.environment == "devl" ? 0 : length(var.managed)
-  repository = data.github_repository.repository[count.index].full_name
+  repository = data.github_repository.repository[count.index].name
   branch     = local.branch
 }
