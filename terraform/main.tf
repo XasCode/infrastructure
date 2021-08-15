@@ -102,5 +102,4 @@ module "choreographer" {
   gh_token        = var.gh_token
   tf_org          = var.tf_org
   tf_token        = var.tf_token
-  gc              = var.gc
 }
