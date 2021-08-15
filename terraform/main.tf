@@ -94,7 +94,7 @@ module "choreographer" {
   organization_id = var.organization_id
   billing_account = var.billing_account
 
-  envs            = [ "devl" ]
+  envs            = [ "devl", "test" ]
   environment     = var.environment
 
   build           = var.build
