@@ -13,7 +13,7 @@ module "env" {
     path = module.org.path
   }
 
-  envs = [ "devl", "test" ]
+  envs = [ "devl", "test", "prod" ]
   environment  = var.environment
 }
 
@@ -26,7 +26,7 @@ module "corp" {
     path = module.env.path
   }
 
-  envs = [ "devl" ]
+  envs = [ "devl", "test", "prod" ]
   environment  = var.environment
 
   billing_account = var.billing_account
@@ -104,13 +104,3 @@ module "choreographer" {
   tf_token        = var.tf_token
   gc              = var.gc
 }
-
-/*
-data "archive_file" "subdir" {
-  count        = contains(var.envs, var.environment) ? 1 : 0
-
-  type        = "zip"
-  output_path = "subdir.zip"
-  source_dir  = "../subdir"
-}
-*/
