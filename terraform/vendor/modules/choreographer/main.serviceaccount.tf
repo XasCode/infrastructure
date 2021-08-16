@@ -29,3 +29,12 @@ resource "google_storage_bucket_iam_binding" "binding" {
     "serviceAccount:${google_service_account.terraform_account[count.index].email}",
   ]
 }
+
+resource "google_storage_bucket_iam_binding" "binding" {
+  count              = contains(var.envs, var.environment) ? length(var.managed) : 0
+  bucket             = google_storage_bucket.bucket[count.index].name
+  role               = "roles/storage.objectAdmin"
+  members = [
+    "serviceAccount:${google_service_account.terraform_account[count.index].email}",
+  ]
+}
