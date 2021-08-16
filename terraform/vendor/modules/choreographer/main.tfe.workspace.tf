@@ -25,15 +25,6 @@ resource "tfe_variable" "gc" {
   sensitive             = true
 }
 */
-resource "tfe_variable" "gc2" {
-  count                 = contains(var.envs, var.environment) ? length(var.managed) : 0
-  key                   = "GOOGLE_CREDENTIALS"
-  value                 = trimspace(replace(base64decode(google_service_account_key.mykey[count.index].private_key),"\n",""))
-  category              = "env"
-  workspace_id          = tfe_workspace.workspace[count.index].id
-  sensitive             = true
-}
-
 resource "tfe_oauth_client" "xascode" {
   count            = contains(var.envs, var.environment) ? length(var.managed) : 0
 
