@@ -1,8 +1,8 @@
 resource "google_service_account" "terraform_account" {
   count        = contains(var.envs, var.environment) ? length(var.managed) : 0
   project      = var.managed[count.index].id
-  account_id   = "terraform-sa-${var.managed[count.index].name}"
-  display_name = "terraform-sa-${var.managed[count.index].name}"
+  account_id   = "terraform-sa-${var.managed[count.index].name}-${var.environment}"
+  display_name = "terraform-sa-${var.managed[count.index].name}-${var.environment}"
 }
 
 resource "google_service_account_key" "mykey" {
