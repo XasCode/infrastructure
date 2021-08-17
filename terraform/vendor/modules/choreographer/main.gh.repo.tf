@@ -15,9 +15,9 @@ resource "github_repository" "repository" {
 }
 
 data "github_repository" "repository" {
-  count = length(var.managed)
+  count      = contains(var.envs, var.environment) ? length(var.managed) : 0
 
-  full_name = "${var.gh_org}/${var.managed[count.index].name}"
+  full_name  = "${var.gh_org}/${var.managed[count.index].name}"
 
   depends_on = [github_repository.repository]
 }
@@ -38,7 +38,7 @@ resource "github_repository_file" "gh_repo_file_keep" {
 }
 
 resource "github_repository_file" "gh_repo_file_locals" {
-  count = var.environment == "devl" ? length(var.managed) : 0
+  count               = contains(var.envs, var.environment) ? length(var.managed) : 0
 
   repository          = data.github_repository.repository[count.index].name
   branch              = local.branch
@@ -55,7 +55,7 @@ resource "github_repository_file" "gh_repo_file_locals" {
 }
 
 resource "github_repository_file" "gh_repo_file_archive" {
-  count = var.environment == "devl" ? length(var.managed) : 0
+  count               = contains(var.envs, var.environment) ? length(var.managed) : 0
 
   repository          = data.github_repository.repository[count.index].name
   branch              = local.branch
@@ -82,13 +82,14 @@ resource "github_repository_file" "gh_repo_file_archive" {
 }
 
 resource "github_branch" "branch" {
-  count = var.environment == "devl" ? 0 : length(var.managed)
+  count      = contains(var.envs, var.environment) ? length(var.managed) : 0
   repository = data.github_repository.repository[count.index].name
   branch     = local.branch
 }
-
+/*
 data "github_branch" "branch" {
   count = length(var.managed)
   repository = data.github_repository.repository[count.index].name
   branch     = local.branch
 }
+*/
