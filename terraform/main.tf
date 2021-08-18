@@ -74,7 +74,7 @@ module "test" {
 
   billing_account = var.billing_account
 
-  envs   = [ "devl", "test" ]
+  envs   = [ "devl", "test", "prod" ]
   environment    = var.environment
 }
 
@@ -94,7 +94,7 @@ module "choreographer" {
   organization_id = var.organization_id
   billing_account = var.billing_account
 
-  envs            = [ "devl", "test" ]
+  envs            = [ "devl", "test", "prod" ]
   environment     = var.environment
 
   build           = var.build
