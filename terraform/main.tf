@@ -91,15 +91,16 @@ module "choreographer" {
     module.test
   ]
 
-  organization_id = var.organization_id
-  billing_account = var.billing_account
+  organization_name = var.organization_name
+  organization_id   = var.organization_id
+  billing_account   = var.billing_account
 
-  envs            = [ "devl", "test", "prod" ]
-  environment     = var.environment
+  envs              = [ "devl", "test", "prod" ]
+  environment       = var.environment
 
-  build           = var.build
-  gh_org          = var.gh_org
-  gh_token        = var.gh_token
-  tf_org          = var.tf_org
-  tf_token        = var.tf_token
+  build             = var.build
+  gh_org            = var.gh_org
+  gh_token          = var.gh_token
+  tf_org            = var.tf_org
+  tf_token          = var.tf_token
 }
