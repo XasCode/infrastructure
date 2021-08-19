@@ -50,6 +50,14 @@ resource "tfe_variable" "tf_org" {
   workspace_id          = tfe_workspace.workspace[count.index].id
 }
 
+resource "tfe_variable" "organization_name" {
+  count                 = contains(var.envs, var.environment) ? length(var.managed) : 0
+  key                   = "organization_name"
+  value                 = var.organization_name
+  category              = "terraform"
+  workspace_id          = tfe_workspace.workspace[count.index].id
+}
+
 resource "tfe_oauth_client" "xascode" {
   count            = contains(var.envs, var.environment) ? length(var.managed) : 0
 
