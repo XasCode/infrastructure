@@ -75,7 +75,6 @@ resource "github_repository_file" "gh_repo_file_locals" {
   file                = "terraform/locals.tf"
   content             = <<-EOT
     locals {
-      project = var.project.id
       branch  = var.environment == "devl" ? "main" : var.environment
     }
     EOT
